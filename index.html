@@ -4,7 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário de Contatos</title>
-    <link rel="stylesheet" href="main.css">
+    <style>
+        /* Estilize a tabela conforme desejado */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <h1>Adicionar Contato</h1>
@@ -39,9 +58,40 @@
             </tr>
         </thead>
         <tbody>
+            <!-- Linhas de contatos serão adicionadas aqui via JavaScript -->
         </tbody>
     </table>
 
-    <script src="main.js"></script>
+    <script>
+        const form = document.getElementById('contato-form');
+        const tabelaContatos = document.getElementById('tabela-contatos');
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            // Obter valores do formulário
+            const nomeCompleto = form['nome-completo'].value;
+            const email = form.email.value;
+            const telefone = form.telefone.value;
+            const cpf = form.cpf.value;
+            const cep = form.cep.value;
+
+            // Criar nova linha na tabela
+            const novaLinha = document.createElement('tr');
+            novaLinha.innerHTML = `
+                <td>${nomeCompleto}</td>
+                <td>${email}</td>
+                <td>${telefone}</td>
+                <td>${cpf}</td>
+                <td>${cep}</td>
+            `;
+
+            // Adicionar a nova linha à tabela
+            tabelaContatos.querySelector('tbody').appendChild(novaLinha);
+
+            // Limpar campos do formulário
+            form.reset();
+        });
+    </script>
 </body>
 </html>
